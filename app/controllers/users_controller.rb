@@ -55,6 +55,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def bulk_destroy
+    User.where(id: params[:users]).destroy_all
+
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: "Successfully destroyed users." }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
