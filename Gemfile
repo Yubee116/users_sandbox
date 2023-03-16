@@ -48,6 +48,9 @@ gem "bootsnap", require: false
 # to paginate the data 
 gem 'pagy'
 
+# for backgorund jon to send email
+gem "sidekiq"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -68,6 +71,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  # to open emails
+  gem "letter_opener"
 end
 
 group :test do
