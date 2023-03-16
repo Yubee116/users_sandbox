@@ -1,10 +1,7 @@
-require 'net/http'
-
-url = URI('https://dummyjson.com/users')
-
-res = Net::HTTP.get_response(url)
-resBody = JSON.parse(res.body) if res.is_a?(Net::HTTPSuccess)
-
-resBody['users'].each do |user|
-    User.create(user)
+skip = 0
+limit = 30
+while skip <= 100
+    url = "https://dummyjson.com/users?limit=#{limit}&skip=#{skip}"
+    FetchUsersJob.perform_async(url)
+    skip = skip + limit
 end
