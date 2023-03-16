@@ -1,0 +1,77 @@
+<div id="<%= dom_id user %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Firstname:</strong>
+    <%= user.firstName %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Lastname:</strong>
+    <%= user.lastName %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Age:</strong>
+    <%= user.age %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Gender:</strong>
+    <%= user.gender %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= user.email %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Phone:</strong>
+    <%= user.phone %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Birthdate:</strong>
+    <%= user.birthDate %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Bloodgroup:</strong>
+    <%= user.bloodGroup %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Height:</strong>
+    <%= user.height %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Weight:</strong>
+    <%= user.weight %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Eyecolor:</strong>
+    <%= user.eyeColor %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Hair:</strong>
+    <%= user.hair %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Address:</strong>
+    <%= user.address %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Company:</strong>
+    <%= user.company %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this user", user, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this user', edit_user_path(user), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
