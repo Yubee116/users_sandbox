@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       if @user.save
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('notification', partial: 'shared/notification',
+            turbo_stream.update('notification', partial: 'shared/notification',
                                                  locals: { notice: 'User was successfully created.' }),
             turbo_stream.replace('user_form', partial: 'users/form', locals: { user: User.new })
           ]
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('notification', partial: 'shared/notification',
+            turbo_stream.update('notification', partial: 'shared/notification',
                                                  locals: { notice: 'User was successfully updated.' }),
             turbo_stream.replace('user_form', partial: 'users/form', locals: { user: @user })
           ]
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace('notification', partial: 'shared/notification',
+          turbo_stream.update('notification', partial: 'shared/notification',
                                                locals: { notice: 'User was successfully deleted.' }),
           turbo_stream.remove(@user)
         ]
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
     User.where(id: params[:users]).destroy_all
 
     respond_to do |format|
-      ts = [turbo_stream.replace('notification', partial: 'shared/notification',
+      ts = [turbo_stream.update('notification', partial: 'shared/notification',
                                                  locals: { notice: 'Successfully destroyed users.' })]
 
       params[:users].each do |id|
