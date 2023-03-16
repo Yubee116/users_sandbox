@@ -80,6 +80,16 @@ class UsersController < ApplicationController
     User.where(id: params[:users]).destroy_all
 
     respond_to do |format|
+      ts = [turbo_stream.replace('notification', partial: 'shared/notification',
+                                                 locals: { notice: 'Successfully destroyed users.' })]
+
+      params[:users].each do |id|
+        ts.push(turbo_stream.remove("user_#{id}"))
+      end
+
+      format.turbo_stream do
+        render turbo_stream: ts
+      end
       format.html { redirect_to users_url, notice: 'Successfully destroyed users.' }
       format.json { head :no_content }
     end
