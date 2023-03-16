@@ -23,6 +23,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace('notification', partial: 'shared/notification',
+                                                 locals: { notice: 'User was successfully created.' }),
+            turbo_stream.replace('user_form', partial: 'users/form', locals: { user: User.new })
+          ]
+        end
         format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -36,6 +43,13 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace('notification', partial: 'shared/notification',
+                                                 locals: { notice: 'User was successfully updated.' }),
+            turbo_stream.replace('user_form', partial: 'users/form', locals: { user: @user })
+          ]
+        end
         format.html { redirect_to user_url(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -50,6 +64,13 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace('notification', partial: 'shared/notification',
+                                               locals: { notice: 'User was successfully deleted.' }),
+          turbo_stream.remove(@user)
+        ]
+      end
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -59,7 +80,7 @@ class UsersController < ApplicationController
     User.where(id: params[:users]).destroy_all
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "Successfully destroyed users." }
+      format.html { redirect_to users_url, notice: 'Successfully destroyed users.' }
       format.json { head :no_content }
     end
   end
