@@ -77,6 +77,7 @@ class UsersController < ApplicationController
   end
 
   def bulk_destroy
+    return unless params[:users]
     User.where(id: params[:users]).destroy_all
 
     respond_to do |format|
