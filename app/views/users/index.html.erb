@@ -6,13 +6,35 @@
     <h1 class="font-bold text-4xl">Users</h1>
     <%= link_to 'New user', new_user_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-  <div class="flex space-x-6 items-center">
-    <%= form_tag users_path, method: :get, data: { turbo_frame: "search-results", turbo_action: "advance", controller: "search", action: "input->search#submit" } do |f| %>
-      <%= text_field_tag "name", nil, placeholder: "Search user by name...", class: "input input-bordered w-full max-w-xs my-5" %>
-    <% end %>
-    <%= form_tag users_path, method: :get, data: { turbo_frame: "search-results", turbo_action: "advance", controller: "search", action: "input->search#submit" } do |f| %>
-      <%= text_field_tag "email", nil, placeholder: "Search user by email", class: "input input-bordered w-full max-w-xs my-5" %>
-    <% end %>
+  <div class="flex justify-between items-center w-3/4 my-2 ">
+    <div class="w-96 justify-center items-center">
+      <h3 class="font-medium text-2xl leading-tight text-gray-600">Search</h3>
+      <%= form_tag users_path, method: :get, data: { turbo_frame: "search-results", controller: "search", action: "input->search#submit" } do |f| %>
+        <%= text_field_tag "name", nil, placeholder: "Search user by name...", class: "input input-bordered w-full max-w-xs my-3" %>
+      <% end %>
+      <%= form_tag users_path, method: :get, data: { turbo_frame: "search-results", controller: "search", action: "input->search#submit" } do |f| %>
+        <%= text_field_tag "email", nil, placeholder: "Search user by email", class: "input input-bordered w-full max-w-xs my-3" %>
+      <% end %>
+    </div>
+    <div class="w-96 justify-center items-center">
+      <h3 class="font-medium text-2xl leading-tight text-gray-600">Filter by...</h3>
+      <%= form_tag users_path, method: :get, data: { turbo_frame: "search-results", turbo_action: "advance", controller: "search", action: "input->search#submit" } do |f| %>
+        <div class="flex justify-center items-center space-x-4">
+          <div>
+            <span class="">Gender</span>
+            <span class="text-gray-400 text-sm flex align-center w-max">Two for now</span>
+          </div>
+          <%= select_tag "gender", options_for_select([ "male", "female" ], "N/A"), include_blank: true, class: "input input-bordered w-full max-w-xs my-3" %>
+        </div>
+        <div class="flex justify-center items-center space-x-2">
+          <div>
+            <span class="">Height</span>
+            <span class="text-gray-400 text-sm flex align-center w-max ">Average=170</span>
+          </div>
+          <%= select_tag "height", options_for_select([ ["Above Average", '>'], ["Below Average", '<'] ], "N/A"), include_blank: true, class: "input input-bordered w-full max-w-xs my-3" %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div id="users" class="min-w-full mb-8">
     <%= turbo_frame_tag "search-results" do %>
@@ -36,7 +58,7 @@
           </tbody>
         </table>
         <div class="flex w-3/4 justify-between items-center">
-          <%= submit_tag "Delete Checked", data: { turbo_frame: "_top" }, class: "rounded py-3 px-5 bg-gray-300 hover:bg-red-300 cursor-pointer block font-medium"%>
+          <%= submit_tag "Delete Checked", data: { turbo_frame: "_top", turbo_confirm: "Are you sure you want to delete the selected users?" }, class: "rounded py-3 px-5 bg-gray-300 hover:bg-red-300 cursor-pointer block font-medium"%>
         <% end %>
         <%== pagy_nav(@pagy) %>
       <% end %>
