@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :gender, :email, :height, presence: true
+  validates :email, uniqueness: true
   after_destroy :send_removed_mail
 
   def self.search(params)
