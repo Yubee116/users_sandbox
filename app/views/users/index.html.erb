@@ -40,20 +40,10 @@
     <%= turbo_frame_tag "search-results" do %>
       <%= form_tag bulk_destroy_users_path, :method => :delete do %>
         <table class="text-left mb-5 w-3/4">
-          <thead class="uppercase bg-gray-300">
-            <tr>
-              <th class="sr-only">Select</th>
-              <th class="px-3 py-3">First Name</th>
-              <th class="px-3 py-3">Last Name</th>
-              <th class="px-3 py-3">Email</th>
-              <th class="px-3 py-3">Gender</th>
-              <th class="px-3 py-3">Height</th>
-              <th class="px-3 py-3" colspan="3">Actions</th>
-            </tr>
-          </thead>
+          <%= render(UserTableHeaderComponent.new(["First Name", "Last Name", "Email", "Gender", "Height"]))%>
           <tbody id="user-list">
             <% @users.each do |user| %>
-              <%= render partial: "user_row", locals: { user: user }  %>
+              <%= render(UserTableRowComponent.new(user)) %> 
             <% end %>
           </tbody>
         </table>

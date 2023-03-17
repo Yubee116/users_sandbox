@@ -51,6 +51,8 @@ gem 'pagy'
 # for backgorund jon to send email
 gem "sidekiq"
 
+gem "view_component"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
