@@ -3,7 +3,7 @@ require "application_system_test_case"
 class UsersTest < ApplicationSystemTestCase
   setup do
     @user = users(:one)
-    # @users = users(:all)
+    @users = User.all
   end
 
   test "visiting the index" do
@@ -54,8 +54,6 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test "should destroy multiple Users" do
-    @users = User.all
-
     visit users_url
     for user in @users do
       check "user_#{user.id}_checkbox"
