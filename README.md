@@ -36,7 +36,9 @@ $ rails db:seed
 
 
 # Running Tests
-From the app root directory, Run `rails test -v` for verbose execution of test
+From the app root directory, 
+- Run `rails test -v` for verbose execution of tests: Model, Controller, ViewComponent, Job/Worker
+- Run `rails test:system` to execute system tests (requires running sidekiq process)
 
 # Making it better
 Below is a non-exhaustive list of possible improvements to the app

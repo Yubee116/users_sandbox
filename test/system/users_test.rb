@@ -3,6 +3,7 @@ require "application_system_test_case"
 class UsersTest < ApplicationSystemTestCase
   setup do
     @user = users(:one)
+    # @users = users(:all)
   end
 
   test "visiting the index" do
@@ -44,10 +45,25 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  # test "should destroy User" do
-  #   visit user_url(@user)
-  #   click_on "Destroy this user", match: :first
+  test "should destroy User" do
+    visit users_url
+    click_on "Destroy", match: :first
+    accept_confirm 'Are you sure you want to delete the user?'
 
-  #   assert_text "User was successfully destroyed"
-  # end
+    assert_text "User was successfully deleted"
+  end
+
+  test "should destroy multiple Users" do
+    @users = User.all
+
+    visit users_url
+    for user in @users do
+      check "user_#{user.id}_checkbox"
+    end
+
+    click_on "Delete Checked", match: :first
+    accept_confirm 'Are you sure you want to delete the selected users?'
+
+    assert_text "Successfully destroyed users"
+  end
 end

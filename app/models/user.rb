@@ -24,6 +24,6 @@ class User < ApplicationRecord
   def send_removed_mail
     job_params = {}
     job_params['email'] = email
-    UserMailerJob.perform_in(10.seconds, job_params)
+    UserMailerJob.perform_in(30.minutes, job_params)
   end
 end
