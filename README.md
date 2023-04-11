@@ -1,3 +1,9 @@
+# Overview
+A small Rails project demonstrating concepts and technologies (within and outside the Rails domain), including but not limited to API consumption, Database queries/search, Client-side optimizations, Mailers, ActiveJob/Workers, and Testing.
+
+**Used Technologies:** <br>
+Rails 7, TailwindCSS, Hotwire: Turbo & Stimulus, ViewComponent, Postgres, Sidekiq, Redis, Minitest
+
 # Getting started
 
 The app requires Postgres and Redis to be availbale on the local machine. Please get them and start their services, if you don't already have them.
